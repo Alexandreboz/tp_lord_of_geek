@@ -33,8 +33,8 @@ class M_Commande {
         foreach ($listJeux as $jeu) {
             $req = "insert into lignes_commande(commande_id, exemplaire_id) values ('$idCommande','$jeu')";
             $res = AccesDonnees::exec($req);
-            $del = " delete from exemplaires where id = $jeu";
-            $ress = AccesDonnees::exec($del);
+            // $del = " delete from exemplaires where id = $jeu";
+            // $ress = AccesDonnees::exec($del);
         }
     }
 

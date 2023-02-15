@@ -21,9 +21,12 @@ class M_Exemplaire {
         JOIN licences ON exemplaires.licences_id = licences.id
         JOIN console ON exemplaires.console_id = console.id
         JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
-        WHERE categorie_id = '$idCategorie'";
-        $res = AccesDonnees::query($req);
-        $lesLignes = $res->fetchAll();
+        WHERE categorie_id = :id";
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $idCategorie, PDO::PARAM_INT);
+        $stmt->execute();
+        $lesLignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lesLignes;
     }
     public static function trouveLesJeuxDeEtat($idEtat) {
@@ -33,9 +36,12 @@ class M_Exemplaire {
         JOIN licences ON exemplaires.licences_id = licences.id
         JOIN console ON exemplaires.console_id = console.id
         JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
-        WHERE etat_id = '$idEtat'";
-        $res = AccesDonnees::query($req);
-        $lesLignes = $res->fetchAll();
+        WHERE etat_id = :id ";
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $idEtat, PDO::PARAM_INT);
+        $stmt->execute();
+        $lesLignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lesLignes;
     }
     public static function trouveLesJeuxDeConsole($idConsole) {
@@ -45,9 +51,12 @@ class M_Exemplaire {
         JOIN licences ON exemplaires.licences_id = licences.id
         JOIN console ON exemplaires.console_id = console.id
         JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
-        WHERE console_id = '$idConsole'";
-        $res = AccesDonnees::query($req);
-        $lesLignes = $res->fetchAll();
+        WHERE console_id = :id";
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $idConsole, PDO::PARAM_INT);
+        $stmt->execute();
+        $lesLignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lesLignes;
     }
     public static function trouveLesJeuxDeEdition($idEdition) {
@@ -57,9 +66,12 @@ class M_Exemplaire {
         JOIN licences ON exemplaires.licences_id = licences.id
         JOIN console ON exemplaires.console_id = console.id
         JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
-        WHERE edition_id = '$idEdition'";
-        $res = AccesDonnees::query($req);
-        $lesLignes = $res->fetchAll();
+        WHERE edition_id = :id";
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $idEdition, PDO::PARAM_INT);
+        $stmt->execute();
+        $lesLignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lesLignes;
     }
     public static function trouveLesJeuxDeLicence($idLicence) {
@@ -83,14 +95,21 @@ class M_Exemplaire {
      * @param $desIdJeux tableau d'idProduits
      * @return un tableau associatif
      */
-    public static function trouveLesJeuxDuTableau($desIdJeux) {
+    public static function trouveLesJeuxDuTableau($desIdJeux)
+    {
         $nbProduits = count($desIdJeux);
         $lesProduits = array();
         if ($nbProduits != 0) {
             foreach ($desIdJeux as $unIdProduit) {
-                $req = "SELECT * FROM exemplaires WHERE id = '$unIdProduit'";
-                $res = AccesDonnees::query($req);
-                $unProduit = $res->fetch();
+                $req = "SELECT exemplaires.*
+                FROM exemplaires 
+                WHERE exemplaires.id = :unIdProduit";
+                $pdo = AccesDonnees::getPdo();
+                $stmt = $pdo->prepare($req);
+                $stmt->bindParam(':unIdProduit', $unIdProduit, PDO::PARAM_INT);
+                $stmt->execute();
+                $unProduit = $stmt->fetch(PDO::FETCH_ASSOC);
+
                 $lesProduits[] = $unProduit;
             }
         }

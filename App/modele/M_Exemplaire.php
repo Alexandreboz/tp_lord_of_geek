@@ -21,7 +21,9 @@ class M_Exemplaire {
         JOIN licences ON exemplaires.licences_id = licences.id
         JOIN console ON exemplaires.console_id = console.id
         JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
-        WHERE categorie_id = :id";
+        LEFT JOIN lignes_commande ON lignes_commande.exemplaire_id=exemplaires.id 
+        WHERE exemplaires.id NOT IN (SELECT exemplaire_id FROM lignes_commande WHERE exemplaire_id IS NOT NULL)
+        AND categorie_id = :id";
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $idCategorie, PDO::PARAM_INT);
@@ -36,7 +38,9 @@ class M_Exemplaire {
         JOIN licences ON exemplaires.licences_id = licences.id
         JOIN console ON exemplaires.console_id = console.id
         JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
-        WHERE etat_id = :id ";
+        LEFT JOIN lignes_commande ON lignes_commande.exemplaire_id=exemplaires.id 
+        WHERE exemplaires.id NOT IN (SELECT exemplaire_id FROM lignes_commande WHERE exemplaire_id IS NOT NULL)
+        AND etat_id = :id ";
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $idEtat, PDO::PARAM_INT);
@@ -51,7 +55,9 @@ class M_Exemplaire {
         JOIN licences ON exemplaires.licences_id = licences.id
         JOIN console ON exemplaires.console_id = console.id
         JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
-        WHERE console_id = :id";
+        LEFT JOIN lignes_commande ON lignes_commande.exemplaire_id=exemplaires.id 
+        WHERE exemplaires.id NOT IN (SELECT exemplaire_id FROM lignes_commande WHERE exemplaire_id IS NOT NULL)
+        AND console_id = :id";
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $idConsole, PDO::PARAM_INT);
@@ -66,7 +72,9 @@ class M_Exemplaire {
         JOIN licences ON exemplaires.licences_id = licences.id
         JOIN console ON exemplaires.console_id = console.id
         JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
-        WHERE edition_id = :id";
+        LEFT JOIN lignes_commande ON lignes_commande.exemplaire_id=exemplaires.id 
+        WHERE exemplaires.id NOT IN (SELECT exemplaire_id FROM lignes_commande WHERE exemplaire_id IS NOT NULL)
+        AND edition_id = :id";
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $idEdition, PDO::PARAM_INT);
@@ -81,7 +89,9 @@ class M_Exemplaire {
         JOIN licences ON exemplaires.licences_id = licences.id
         JOIN console ON exemplaires.console_id = console.id
         JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
-        WHERE licences_id = :id";
+        LEFT JOIN lignes_commande ON lignes_commande.exemplaire_id=exemplaires.id 
+        WHERE exemplaires.id NOT IN (SELECT exemplaire_id FROM lignes_commande WHERE exemplaire_id IS NOT NULL)
+        AND licences.id = :id;";
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $idLicence, PDO::PARAM_INT);
@@ -115,5 +125,15 @@ class M_Exemplaire {
         }
         return $lesProduits;
     }
-
+    // public static function afficherLesJeuxNonCommande()
+    // {
+    //    $req = "SELECT exemplaires.id, commandes.id, commandes.client_id 
+    //    FROM commandes 
+    //    LEFT JOIN lignes_commande ON lignes_commande.commande_id=commandes.id 
+    //    LEFT JOIN exemplaires ON lignes_commande.exemplaire_id=exemplaires.id 
+    //    WHERE client_id IS NOT NULL";
+    //    $res = AccesDonnees::query($req);
+    //    $lesLignes = $res->fetchAll();
+    //    return $lesLignes;
+    // }
 }

@@ -26,15 +26,14 @@ class M_Commande {
         $res = AccesDonnees::exec($reqClient);
         $idClient = AccesDonnees::getPdo()->lastInsertId();
 
-        $reqCommande ="insert into commandes(client_id) values($idClient)"; 
+        $reqCommande ="insert into commandes(client_id) values($idClient)";
         $res = AccesDonnees::exec($reqCommande);
         $idCommande = AccesDonnees::getPdo()->lastInsertId();
 
         foreach ($listJeux as $jeu) {
             $req = "insert into lignes_commande(commande_id, exemplaire_id) values ('$idCommande','$jeu')";
             $res = AccesDonnees::exec($req);
-            // $del = " delete from exemplaires where id = $jeu";
-            // $ress = AccesDonnees::exec($del);
+            $idLignes = AccesDonnees::getPdo()->lastInsertId();
         }
     }
 

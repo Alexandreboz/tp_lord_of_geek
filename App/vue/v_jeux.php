@@ -62,7 +62,7 @@
             $etat = $unJeu['nom_etat'];
             $console = $unJeu['nom_console'];
             $licence = $unJeu['nom_licence'];
-            $edition = $unJeu['nom_edition']
+            $edition = $unJeu['nom_edition']; 
             ?>
             <article>
                 <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $description; ?>"/>

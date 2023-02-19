@@ -17,6 +17,10 @@ $uc = filter_input(INPUT_GET, 'uc'); // Use Case
 $action = filter_input(INPUT_GET, 'action'); // Action
 initPanier();
 
+if (!empty($_SESSION['client'])) {
+    $clientSession = $_SESSION['client'];
+}
+
 if (!$uc) {
     $uc = 'accueil';
 }
@@ -30,11 +34,18 @@ switch ($uc) {
         include 'App/controleur/c_gestionPanier.php';
         break;
     case 'commander':
+        $idClient = filter_input(INPUT_GET, "idClient");
         include 'App/controleur/c_passerCommande.php';
         break;
-    case 'administrer' :
+    case 'compte' :
         include 'App/controleur/c_monCompte.php';
         break;
+    case 'inscription' :
+        include 'App/controleur/c_client.php';
+        break;
+    case 'authentification' :
+        include 'App/controleur/c_authentification.php';
+        break;   
     default:
         break;
 }

@@ -82,13 +82,17 @@ function retirerDuPanier($idProduit) {
  * @param array $msgErreurs
  */
 function afficheErreurs(array $msgErreurs) {
-    echo '﻿<div class="erreur"><ul>';
+    echo '<div class="erreur"><ul>';
     foreach ($msgErreurs as $erreur) {
         ?>     
-        <li><?php echo $erreur ?></li>
+        <li><?= $erreur ?></li>
         <?php
     }
     echo '</ul></div>';
+}
+
+function afficheErreur(string $msgErreur) {
+    echo '<div class="erreur">' . $msgErreur . '</div>';
 }
 
 /**
@@ -96,5 +100,5 @@ function afficheErreurs(array $msgErreurs) {
  * @param string $msg
  */
 function afficheMessage(string $msg) {
-    echo '﻿<div class="message">'.$msg.'</div>';
+    echo '<div class="message">'.$msg.'</div>';
 }

@@ -51,8 +51,7 @@
 
         </ul>
     </aside>
-    <section  id="jeux">
-        <?php
+    <?php
         foreach ($lesJeux as $unJeu) {
             $id = $unJeu['id'];
             $description = $unJeu['descriptions'];
@@ -64,8 +63,8 @@
             $licence = $unJeu['nom_licence'];
             $edition = $unJeu['nom_edition']; 
             ?>
-            <article>
-                <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $description; ?>"/>
+            <article style="margin-top: 20px; margin-left: 20px">
+                <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $description; ?>" width="200px" height="200px"/>
                 <p><?= $description ?></p>
                 <p><?= "Prix :   $prix  Euros <br> Année de sortie : $annee<br> Etat du l'exemplaire : $etat<br>Sur la console : $console<br>La licence est : $licence<br>L'édition du jeu est : $edition"?>
                     <a href="index.php?uc=visite&categorie=<?= $categorie ?>&jeu=<?= $id ?>&action=ajouterAuPanier">

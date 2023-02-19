@@ -99,6 +99,41 @@ class M_Exemplaire {
         $lesLignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lesLignes;
     }
+    public static function trouveToutLesJeux($idExemplaire) {
+        $req = "SELECT exemplaires.*, etat_jeu.nom_etat, console.nom_console, licences.nom_licence, editions.nom_edition  
+        FROM exemplaires
+        JOIN editions ON exemplaires.edition_id = editions.id
+        JOIN licences ON exemplaires.licences_id = licences.id
+        JOIN console ON exemplaires.console_id = console.id
+        JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
+        LEFT JOIN lignes_commande ON lignes_commande.exemplaire_id=exemplaires.id 
+        WHERE exemplaires.id NOT IN (SELECT exemplaire_id FROM lignes_commande WHERE exemplaire_id IS NOT NULL)
+        AND exemplaires.id = :id;";
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $idExemplaire, PDO::PARAM_INT);
+        $stmt->execute();
+        $lesLignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $lesLignes;
+    }
+
+    public static function trouveToutesLesAnnees($idAnnee) {
+        $req = "SELECT exemplaires.*, etat_jeu.nom_etat, console.nom_console, licences.nom_licence, editions.nom_edition  
+        FROM exemplaires
+        JOIN editions ON exemplaires.edition_id = editions.id
+        JOIN licences ON exemplaires.licences_id = licences.id
+        JOIN console ON exemplaires.console_id = console.id
+        JOIN etat_jeu ON exemplaires.etat_id = etat_jeu.id
+        LEFT JOIN lignes_commande ON lignes_commande.exemplaire_id=exemplaires.id 
+        WHERE exemplaires.id NOT IN (SELECT exemplaire_id FROM lignes_commande WHERE exemplaire_id IS NOT NULL)
+        AND exemplaires.id = :id;";
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $idAnnee, PDO::PARAM_INT);
+        $stmt->execute();
+        $lesLignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $lesLignes;
+    }
     /**
      * Retourne les jeux concernés par le tableau des idProduits passée en argument
      *

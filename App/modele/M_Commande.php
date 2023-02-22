@@ -21,22 +21,47 @@ class M_Commande {
      * @param $listJeux
 
      */
-    public static function creerCommande($nom, $rue, $cp, $ville, $mail, $listJeux) {
-        $reqClient = "insert into clients(nomPrenom, adresseRueClient, cpClient, villeClient, mailClient) values ('$nom','$rue','$cp','$ville','$mail')";
-        $res = AccesDonnees::exec($reqClient);
-        $idClient = AccesDonnees::getPdo()->lastInsertId();
+    // public static function creerCommande($nom, $rue, $cp, $ville, $mail, $listJeux) {
+    //     $reqClient = "insert into clients(nomPrenom, adresseRueClient, cpClient, villeClient, mailClient) values ('$nom','$rue','$cp','$ville','$mail')";
+    //     $res = AccesDonnees::exec($reqClient);
+    //     $idClient = AccesDonnees::getPdo()->lastInsertId();
 
-        $reqCommande ="insert into commandes(client_id) values($idClient)";
-        $res = AccesDonnees::exec($reqCommande);
+    //     $reqCommande ="insert into commandes(client_id) values($idClient)";
+    //     $res = AccesDonnees::exec($reqCommande);
+    //     $idCommande = AccesDonnees::getPdo()->lastInsertId();
+    public static function creerCommande($idClient, $listJeux) {
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare("INSERT INTO commandes(created_at, client_id) VALUES (NOW(), :idClient)");
+        $stmt->bindParam(":idClient", $idClient);
+        $stmt->execute();
+
         $idCommande = AccesDonnees::getPdo()->lastInsertId();
 
         foreach ($listJeux as $jeu) {
-            $req = "insert into lignes_commande(commande_id, exemplaire_id) values ('$idCommande','$jeu')";
-            $res = AccesDonnees::exec($req);
-            $idLignes = AccesDonnees::getPdo()->lastInsertId();
+            // $req = "insert into lignes_commande(commande_id, exemplaire_id) values ('$idCommande','$jeu')";
+            // $res = AccesDonnees::exec($req);
+            // $idLignes = AccesDonnees::getPdo()->lastInsertId();
+            $pdo = AccesDonnees::getPdo();
+            $stmt = $pdo->prepare("INSERT INTO lignes_commande(commande_id, exemplaire_id) VALUES (:idCommande, :jeu)");
+            $stmt->bindParam(":idCommande", $idCommande);
+            $stmt->bindParam(":jeu", $jeu);
+            $stmt->execute();
         }
     }
-
+    public static function afficherCommandes($idClient) {
+        $pdo = Accesdonnees::getPdo();
+        $stmt = $pdo->prepare("SELECT exemplaires.*, commandes.*, clients.*
+        FROM clients
+        JOIN commandes ON commandes.client_id = clients.id
+        JOIN lignes_commande ON lignes_commande.commande_id = commandes.id
+        JOIN exemplaires ON exemplaires.id = lignes_commande.exemplaire_id
+        WHERE clients.id = :clientId
+        ORDER BY commandes.id DESC");
+        $stmt->bindParam(":clientId", $idClient);
+        $stmt->execute();
+        $lesCommandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $lesCommandes;
+    }
     /**
      * Retourne vrai si pas d'erreur
      * Remplie le tableau d'erreur s'il y a

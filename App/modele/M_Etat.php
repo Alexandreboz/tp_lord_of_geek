@@ -8,7 +8,7 @@
 class M_Etat {
 
     /**
-     * Retourne toutes les catégories sous forme d'un tableau associatif
+     * Retourne tous les etats sous forme d'un tableau associatif
      *
      * @return le tableau associatif des catégories
      */

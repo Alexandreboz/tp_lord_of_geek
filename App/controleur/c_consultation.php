@@ -7,6 +7,7 @@ include 'App/modele/M_Licences.php';
 include 'App/modele/M_Edition.php';
 include 'App/modele/M_Tout.php';
 include 'App/modele/M_Annee.php';
+include 'App/modele/M_Commande.php';
 
 /**
  * Controleur pour la consultation des exemplaires
@@ -38,9 +39,13 @@ switch ($action) {
         $lesJeux = M_Exemplaire::trouveToutLesJeux($tout);
         break;    
     case 'voirAnnee' :
-        $Annee = filter_input(INPUT_GET, 'Annee$Annee');
+        $Annee = filter_input(INPUT_GET, 'Annee');
         $lesJeux = M_Exemplaire::trouveToutesLesAnnees($Annee);
-        break;     
+        break;
+    // case 'consulterJeu':
+    //     $idJeu = filter_input(INPUT_GET, 'id');
+    //     $lesJeux = M_Exemplaire::trouveUnJeu($idJeu);
+    //     break;
     case 'ajouterAuPanier' :
         $idJeu = filter_input(INPUT_GET, 'jeu');
         $categorie = filter_input(INPUT_GET, 'categorie');

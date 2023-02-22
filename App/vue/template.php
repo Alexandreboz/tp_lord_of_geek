@@ -25,6 +25,7 @@ Prototype de Lord Of Geek (LOG)
                     echo "<li><a href = 'index.php?uc=inscription'> Inscription </a></li>";
                 } else {
                     echo "<li><a href = 'index.php?uc=compte'>Mon compte</a></li>";
+                    echo "<li><a href='index.php?uc=authentification&action=logoutClient'> Se déconnecter </a></li>";
                 }
                 ?>
                 </ul>
@@ -50,6 +51,15 @@ Prototype de Lord Of Geek (LOG)
                     break;
                 case 'inscription':
                     include("App/vue/v_inscription.php");
+                    break;
+                case 'consulterJeu':
+                    include'App/modele/M_Exemplaire.php';
+                    $idJeu = filter_input(INPUT_GET, 'id');
+                    $lesJeux = M_Exemplaire::trouveUnJeu($idJeu);
+                    // $idJeu = filter_input(INPUT_GET, 'id');
+                    $laConsole = M_Exemplaire::trouveMemeConsole($idJeu);
+                    $laCategorie = M_Exemplaire::trouveMemeCategorie($idJeu);
+                    include'App/vue/v_once.php';
                     break;
                 case 'authentification':
                     include("App/vue/v_authentification.php");

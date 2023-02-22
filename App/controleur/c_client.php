@@ -13,17 +13,10 @@ switch ($action) {
         $mail = filter_input(INPUT_POST, 'mail');
         $mdp = filter_input(INPUT_POST, 'mdp');
         $erreurs = M_Client::creerClient($identifiant, $mdp, $nom, $prenom, $adresse, $cp, $ville, $mail);
-       
-      
         if ($erreurs) {
             afficheErreurs($erreurs);
         } else {
-            afficheMessage("Vous êtes bien inscrit !");
+            afficheMessage("Vous êtes bien inscrit, félicitations !");
         }
-
-        break;
-
-    default:
-        $client = [];
         break;
 }

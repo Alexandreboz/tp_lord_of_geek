@@ -8,7 +8,7 @@
 class M_Edition {
 
     /**
-     * Retourne toutes les catégories sous forme d'un tableau associatif
+     * Retourne toutes les étidtion sous forme d'un tableau associatif
      *
      * @return le tableau associatif des catégories
      */

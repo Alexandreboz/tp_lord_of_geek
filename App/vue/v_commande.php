@@ -1,25 +1,25 @@
-﻿<section id="creationCommande">
+﻿<!-- <section id="creationCommande">
     <form method="POST" action="index.php?uc=commander&action=confirmerCommande">
         <fieldset>
             <legend>Commande</legend>
             <p>
-                <label for="nom">Nom Prénom*</label>
+                <label for="nom">Nom Prénom</label>
                 <input id="nom" type="text" name="nom" value="<?= $nom ?>" size="30" maxlength="45">
             </p>
             <p>
-                <label for="rue">rue*</label>
+                <label for="rue">rue</label>
                 <input id="rue" type="text" name="rue" value="<?= $rue ?>" size="30" maxlength="45">
             </p>
             <p>
-                <label for="cp">code postal* </label>
+                <label for="cp">code postal</label>
                 <input id="cp" type="text" name="cp" value="<?= $cp ?>" size="10" maxlength="10">
             </p>
             <p>
-                <label for="ville">ville* </label>
+                <label for="ville">ville</label>
                 <input id="ville" type="text" name="ville"  value="<?= $ville ?>" size="5" maxlength="25">
             </p>
             <p>
-                <label for="mail">mail* </label>
+                <label for="mail">mail</label>
                 <input id="mail" type="text"  name="mail" value="<?= $mail ?>" size ="25" maxlength="25">
             </p> 
             <p>
@@ -32,4 +32,4 @@
 
 
 
-
+ -->

@@ -8,7 +8,7 @@
 class M_Console {
 
     /**
-     * Retourne toutes les catégories sous forme d'un tableau associatif
+     * Retourne toutes les consoles sous forme d'un tableau associatif
      *
      * @return le tableau associatif des catégories
      */

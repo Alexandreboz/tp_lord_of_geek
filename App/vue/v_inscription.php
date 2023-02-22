@@ -7,9 +7,13 @@
                 <input id="identifiant" type="text" name="identifiant" maxlength="90">
             </p>
             <p>
-                <label for="password">Mot de passe</label>
-                <input id="mdp" type="mdp" name="mdp" minlength="6" maxlength="90">
+                <label for="mdp">Mot de passe</label>
+                <input id="mdp" type="text" name="mdp" minlength="6" maxlength="90">
             </p>
+            <!-- <p>
+                <label for="mdp"> Confirmer MDP</label>
+                <input id="mdp2" type="password" name="mdp2" minlength="6" maxlength="90">
+            </p> -->
             <p>
                 <label for="nom">Nom</label>
                 <input id="nom" type="text" name="nom" maxlength="90">

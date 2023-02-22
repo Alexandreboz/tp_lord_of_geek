@@ -8,7 +8,7 @@
 class M_Annee {
 
     /**
-     * Retourne toutes les catégories sous forme d'un tableau associatif
+     * Retourne toutes les années sous forme d'un tableau associatif
      *
      * @return le tableau associatif des catégories
      */

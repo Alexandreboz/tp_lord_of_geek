@@ -19,8 +19,21 @@
         <?php
     }
     ?>
+
+<?php 
+    if (isset($clientSession['id'])) {
+    echo "<a href=index.php?uc=commander&action=passerCommande&idClient=" . $clientSession['id'] . ">";
+    echo '<img src="public/images/commander.jpg" title="Passer commande" >';
+    echo "</a>";
+    } else {
+        echo "<p><strong>Vous devez vous connecter ou vous inscrire pour commander.</p>";
+        echo "<a href=index.php?uc=authentification>Se connecter</a>";
+        echo "<br><br>";
+        echo "<a href=index.php?uc=inscription>S'inscrire</a>";
+    }
+    ?>
     <br>
-    <a href=index.php?uc=commander&action=passerCommande>
+    <!-- <a href=index.php?uc=commander&action=passerCommande>
         <img src="public/images/commander.jpg" title="Passer commande" >
-    </a>
+    </a> -->
 </section>

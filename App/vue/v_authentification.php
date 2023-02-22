@@ -7,8 +7,8 @@
                 <input id="identifiant" type="text" name="identifiant" maxlength="90">
             </p>
             <p>
-                <label for="password">Mot de passe</label>
-                <input id="mdp" type="mdp" name="mdp" minlength="6" maxlength="90">
+                <label for="mdp">Mot de passe</label>
+                <input id="mdp" type="password" name="mdp" minlength="6" maxlength="90">
             </p>
             <p>
                 <input type="submit" value="Valider" name="valider">

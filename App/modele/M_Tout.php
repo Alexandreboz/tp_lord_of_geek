@@ -8,7 +8,7 @@
 class M_Tout {
 
     /**
-     * Retourne toutes les catégories sous forme d'un tableau associatif
+     * Retourne tous les exemplaires et les classe en fonction de leurs id du plus récent au plus ancien sous forme d'un tableau associatif
      *
      * @return le tableau associatif des catégories
      */

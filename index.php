@@ -45,10 +45,7 @@ switch ($uc) {
         break;
     case 'authentification' :
         include 'App/controleur/c_authentification.php';
-        break;
-    // case 'consulterJeu':
-    //     include'App/vue/v_once.php';
-    //     break;   
+        break; 
     default:
         break;
 }

@@ -42,10 +42,6 @@ switch ($action) {
         $Annee = filter_input(INPUT_GET, 'Annee');
         $lesJeux = M_Exemplaire::trouveToutesLesAnnees($Annee);
         break;
-    // case 'consulterJeu':
-    //     $idJeu = filter_input(INPUT_GET, 'id');
-    //     $lesJeux = M_Exemplaire::trouveUnJeu($idJeu);
-    //     break;
     case 'ajouterAuPanier' :
         $idJeu = filter_input(INPUT_GET, 'jeu');
         $categorie = filter_input(INPUT_GET, 'categorie');

@@ -34,8 +34,6 @@ Prototype de Lord Of Geek (LOG)
         </header>
         <main>
             <?php
-            // Controleur de vues
-            // Selon le cas d'utilisation, j'inclus un controleur ou simplement une vue
             switch ($uc) {
                 case 'accueil':
                     include 'App/vue/v_accueil.php';
@@ -46,9 +44,6 @@ Prototype de Lord Of Geek (LOG)
                 case 'panier' :
                     include("App/vue/v_panier.php");
                     break;
-                case 'commander':
-                    include ("App/vue/v_commande.php");
-                    break;
                 case 'inscription':
                     include("App/vue/v_inscription.php");
                     break;
@@ -56,7 +51,6 @@ Prototype de Lord Of Geek (LOG)
                     include'App/modele/M_Exemplaire.php';
                     $idJeu = filter_input(INPUT_GET, 'id');
                     $lesJeux = M_Exemplaire::trouveUnJeu($idJeu);
-                    // $idJeu = filter_input(INPUT_GET, 'id');
                     $laConsole = M_Exemplaire::trouveMemeConsole($idJeu);
                     $laCategorie = M_Exemplaire::trouveMemeCategorie($idJeu);
                     include'App/vue/v_once.php';

@@ -11,7 +11,6 @@ switch ($action) {
             afficheErreur("Entrez votre identifiant et votre mot de passe ou enregistrez-vous sur la page Inscription");
         } else {
             $_SESSION['client'] = $client;
-            supprimerPanier();
             header('Location: index.php');
         }
         break;
